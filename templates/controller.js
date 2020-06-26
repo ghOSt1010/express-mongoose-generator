@@ -1,111 +1,89 @@
-var {modelName} = require({modelPath});
+//var {pluralName} = require({modelPath});
+var {modelNameService} = require({modelServicePath})
 
-/**
- * {controllerName}.js
- *
- * @description :: Server-side logic for managing {pluralName}.
- */
-module.exports = {
+class {modelNameController} {
+    
+    static async list(req, res, err){
 
-    /**
-     * {controllerName}.list()
-     */
-    list: function (req, res) {
-        {modelName}.find(function (err, {pluralName}) {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Error when getting {name}.',
-                    error: err
-                });
-            }
-            return res.json({pluralName});
-        });
-    },
+        try {
+            const {id} = req.query
+            const data = await {modelNameService}.getAll(id)
+            return res.status(200).json(data)
+        }
+        catch (err) {
+            return  res.status(500).jsson(err);
+        }
+        
+    }
 
-    /**
-     * {controllerName}.show()
-     */
-    show: function (req, res) {
+    static async show(req, res, err){
+
         var id = req.params.id;
-        {modelName}.findOne({_id: id}, function (err, {name}) {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Error when getting {name}.',
-                    error: err
-                });
-            }
-            if (!{name}) {
-                return res.status(404).json({
-                    message: 'No such {name}'
-                });
-            }
-            return res.json({name});
-        });
-    },
 
-    /**
-     * {controllerName}.create()
-     */
-    create: function (req, res) {
-        var {name} = new {modelName}({{createFields}
-        });
-
-        {name}.save(function (err, {name}) {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Error when creating {name}',
-                    error: err
-                });
-            }
-            return res.status(201).json({name});
-        });
-    },
-
-    /**
-     * {controllerName}.update()
-     */
-    update: function (req, res) {
-        var id = req.params.id;
-        {modelName}.findOne({_id: id}, function (err, {name}) {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Error when getting {name}',
-                    error: err
-                });
-            }
-            if (!{name}) {
-                return res.status(404).json({
-                    message: 'No such {name}'
-                });
-            }
-
-            {updateFields}
-            {name}.save(function (err, {name}) {
-                if (err) {
-                    return res.status(500).json({
-                        message: 'Error when updating {name}.',
-                        error: err
-                    });
-                }
-
-                return res.json({name});
+        if (!id) {
+            return await res.status(402).json({
+                message: 'MISSING_ARGUMENT'
             });
-        });
-    },
+        }
 
-    /**
-     * {controllerName}.remove()
-     */
-    remove: function (req, res) {
+        try{
+            var data =  await {modelNameService}.getByID(id)
+            return await res.status(200).json(data);
+        }catch(err){
+            return await res.satus(500).json(err)
+        }
+        
+    }
+
+    static async create(req, res, err){
+
+        var {name} = req.body;
+
+        if (!{name}) {
+            return await res.status(402).json({
+                message: 'MISSING_ARGUMENT'
+            });
+        }
+
+        try{
+            var data =  await {modelNameService}.create({name})
+            return await res.status(201).json(data);
+        }catch(err){
+            return await res.satus(500).json(err)
+        }
+    }
+
+    static async update(req, res, err){
+
+        var {name} = req.body;
+
+        if (!{name}) {
+            return await res.status(402).json({
+                message: 'MISSING_ARGUMENT'
+            });
+        }
+
+        try{
+            var data =  await {modelNameService}.update({name})
+            return await res.status(200).json(data);
+        }catch(err){
+            return await res.satus(500).json(err)
+        }
+
+    }
+
+    static async remove(req, res, err){
         var id = req.params.id;
         {modelName}.findByIdAndRemove(id, function (err, {name}) {
             if (err) {
-                return res.status(500).json({
+                return await res.status(500).json({
                     message: 'Error when deleting the {name}.',
                     error: err
                 });
             }
-            return res.status(204).json();
+            return await res.status(204).json();
         });
     }
-};
+}
+
+module.exports = {modelNameController} 
