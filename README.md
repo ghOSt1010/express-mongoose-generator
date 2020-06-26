@@ -64,17 +64,23 @@ models/carModel.js :
 var mongoose = require('mongoose');
 var Schema   = mongoose.Schema;
 
-var carSchema = new Schema({
-	"color" : String,
-	"door" : Number,
-    "owner" : {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    }
+var CarSchema = new Schema({
+	'Brand' : String,
+	'Color' : String,
+	'Owner' : {
+	 	type: mongoose.Schema.Types.ObjectId,
+	 	ref: 'User',
+	 	autopopulate: { maxDepth: 2 },
+	 	required: true
+	}
 });
 
-module.exports = mongoose.model('car', carSchema);
+CarSchema.plugin(require('mongoose-autopopulate'));
+module.exports = mongoose.model('Car', CarSchema);
+
 ```
+@dependency
+Models are using mongoose-autopopulate plugin - dependency
 
 ### Router
 routes/carRoutes.js :
