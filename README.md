@@ -4,9 +4,8 @@
 It’s a mongoose model, REST controller and Express router code generator for Express.js 4 application.
 
 ## Installation
-```bash
-$ npm install -g express-mongoose-generator
-```
+Download and copy this package as in gloabal npm node-modules package
+
 
 ## Usage
 ### Non-Interactive mode
