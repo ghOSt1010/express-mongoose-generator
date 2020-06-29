@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
-var Schema   = mongoose.Schema;
+var Schema = mongoose.Schema;
 
-var {schemaName} = new Schema({fields});
+var { schemaName } = new Schema({ fields });
 
-module.exports = mongoose.model('{modelName}', {schemaName});
+EmployeesSchema.plugin(require('mongoose-autopopulate'));
+module.exports = mongoose.model('{modelName}', { schemaName });

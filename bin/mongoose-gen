@@ -232,6 +232,54 @@ function runInteractiveMode(path) {
                      cb
                   );
                },
+               function (cb) {
+                  if (results.rest !== 'yes') {
+                     return cb();
+                  }
+                  generators.generateClientAPI(
+                     path,
+                     results.name,
+                     results.fields,
+                     results.generateMethod,
+                     cb
+                  );
+               },
+               function (cb) {
+                  if (results.rest !== 'yes') {
+                     return cb();
+                  }
+                  generators.generateClientRoutes(
+                     path,
+                     results.name,
+                     results.fields,
+                     results.generateMethod,
+                     cb
+                  );
+               },
+               function (cb) {
+                  if (results.rest !== 'yes') {
+                     return cb();
+                  }
+                  generators.generateClienDTO(
+                     path,
+                     results.name,
+                     results.fields,
+                     results.generateMethod,
+                     cb
+                  );
+               },
+               function (cb) {
+                  if (results.rest !== 'yes') {
+                     return cb();
+                  }
+                  generators.generateClienService(
+                     path,
+                     results.name,
+                     results.fields,
+                     results.generateMethod,
+                     cb
+                  );
+               },
             ],
             function (err, results) {
                closeProgram();
@@ -299,6 +347,42 @@ function runNonInteractiveMode(path) {
                return cb();
             }
             generators.generateService(
+               path,
+               results.name,
+               results.fields,
+               results.generateMethod,
+               cb
+            );
+         },
+         function (cb) {
+            if (results.rest !== 'yes') {
+               return cb();
+            }
+            generators.generateClientRoutes(
+               path,
+               results.name,
+               results.fields,
+               results.generateMethod,
+               cb
+            );
+         },
+         function (cb) {
+            if (results.rest !== 'yes') {
+               return cb();
+            }
+            generators.generateClienDTO(
+               path,
+               results.name,
+               results.fields,
+               results.generateMethod,
+               cb
+            );
+         },
+         function (cb) {
+            if (results.rest !== 'yes') {
+               return cb();
+            }
+            generators.generateClienService(
                path,
                results.name,
                results.fields,
