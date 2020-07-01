@@ -76,12 +76,12 @@ class {modelNameController} {
         var id = req.params.id;
         {modelName}.findByIdAndRemove(id, function (err, {name}) {
             if (err) {
-                return await res.status(500).json({
+                return res.status(500).json({
                     message: 'Error when deleting the {name}.',
                     error: err
                 });
             }
-            return await res.status(204).json();
+            return res.status(204).json();
         });
     }
 }

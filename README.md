@@ -16,9 +16,6 @@ $ mongoose-gen -m car -f carDoor:number,color -r
         create: ./models/cardModel.js
         create: ./routes/cardRoutes.js
         create: ./controllers/cardController.js
-        create: ./client/API/car/carRoutes.js
-        create: ./client/API/car/carRoutes.js
-        create: ./client/API/car/carRoutes.js
 ```
 
 ##### Options
@@ -56,9 +53,6 @@ Files tree generation grouped by Type or by Module (t/m) ? [t] :
         create: ./models/carModel.js
         create: ./routes/carsRoutes.js
         create: ./controllers/carController.js
-        create: ./client/API/car/carRoutes.js
-        create: ./client/API/car/carRoutes.js
-        create: ./client/API/car/carRoutes.js
 ```
 
 ## Rendering
@@ -238,127 +232,6 @@ module.exports = {
     }
 };
 ```
-### Client DTO Object
-client/API/carDTO.js :
-```javascript
-export default class car {
-   constructor(color, door, owner) {
-		 this.color = color;
-		 this.door = door;
-		 this.owner = owner;
-   }
-
-   getDTO() {
-      return {
-			color: this.color,
-			door: this.door,
-			owner: this.owner
-      }
-   };
-}
-```
-
-### Client API Routes 
-client/API/carRoutes.js :
-```javascript
-const MAIN_PATH = '/api/car';
-
-export default class cars {
-   static GET = MAIN_PATH + '/';
-   static GET_BY_ID = MAIN_PATH + '/id/';
-   static QUERY = MAIN_PATH + '?'   
-   static CREATE = MAIN_PATH + '/';
-   static UPDATE = MAIN_PATH + '/';
-   static DELETE_BY_ID = MAIN_PATH + '/';
-}
-```
-
-### Client API Service 
-client/API/carService.js :
-```javascript
-import car_DTO from './carDTO.js';
-import ROUTES from './carsRoutes.js';
-import Request from '../../Requests/Request';
-
-export default class carService {
-   static async createDTO(color, door, owner) {
-      return new car_DTO(
-         color, door, owner
-      ).getDTO();
-   }
-
-   static async getList() {
-      return await Request.get(ROUTES.GET)
-         .then(result => {
-            return result;
-         })
-         .catch(err => {
-            throw err;
-         });
-   }
-   static async getById(id) {
-      return await Request.get(ROUTES.GET_BY_ID + id)
-         .then(result => {
-            return result;
-         })
-         .catch(err => {
-            throw err;
-         });
-   }
-
-    static async query(color = null, door = null, owner = null) {
-       
-      let ask = '';
-
-      for (let i = 0; i < arguments.length; i++) {
-         if (arguments[i] !== null) {
-            ask += i + '&';
-         }
-      }
-      ask = ask.slice(0, ask.length - 1);
-
-      return await Request.get(ROUTES.QUERY + ask)
-         .then(result => {
-            return result;
-         })
-         .catch(err => {
-            throw err;
-         });
-   }
-
-   static async create(car) {
-      return await Request.post(ROUTES.CREATE, car)
-         .then(result => {
-            return result;
-         })
-         .catch(err => {
-            throw err;
-         });
-   }
-
-   static async updateEmployee(car) {
-      return await Request.put(ROUTES.UPDATE, car)
-         .then(result => {
-            return result;
-         })
-         .catch(err => {
-            throw err;
-         });
-   }
-
-   static async deleteById(id) {
-      return await Request.delete(
-         ROUTES.DELETE_BY_ID + id
-      )
-         .then(result => {
-            return result;
-         })
-         .catch(err => {
-            throw err;
-         });
-   }
-}
-```
 
 ### With files tree generation by module
 ```bash
@@ -367,9 +240,6 @@ Files tree generation grouped by Type or by Module (t/m) ? [t] : m
         create: ./car/carModel.js
         create: ./car/carController.js
         create: ./car/carRoutes.js
-        create: ./client/API/car/carRoutes.js
-        create: ./client/API/car/carRoutes.js
-        create: ./client/API/car/carRoutes.js
 ```
 
 You then only have to add router in app.js file and MongoDB connection whit Mongoose.
@@ -384,8 +254,6 @@ app.use('/cars', cars);
  ...
  
 ```
-
-Client side can be implemented additionally.
 
 ## Licence
 

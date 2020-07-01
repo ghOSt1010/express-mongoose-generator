@@ -43,10 +43,10 @@ class {modelNameService} {
       if (!{modelName}) {
          throw new Error('MISSING_ARGUMENT');
       }
-      const {modelName} = new {pluralName}({modelName});
+      const {tmpModelName} = new {pluralName}({modelName});
 
       try {
-         const doc = await {modelName}.save();
+         const doc = await {tmpModelName}.save();
          return doc;
       } catch {
          throw new Error('CREATE_ERROR {modelName}');
@@ -60,13 +60,13 @@ class {modelNameService} {
 
       {pluralName}.findOne({_id: {modelNameToUpdate}._id}, function (err, {name}) {
          if (err) {
-            return await res.status(500).json({
+            return res.status(500).json({
             message: 'RETRIVE_ERROR: {name}',
             error: err
             });
          }
          if (!{name}) {
-            return await res.status(404).json({
+            return res.status(404).json({
                message: 'MISSING_ERROR: {name}'
             });
          }
@@ -74,12 +74,12 @@ class {modelNameService} {
          {updateFields}
          {name}.save(function (err, {name}) {
             if (err) {
-               return await res.status(500).json({
+               return res.status(500).json({
                   message: 'UPDATE_ERROR: {name}.',
                   error: err
                   });
                }
-               return await res.json({name});
+               return res.json({name});
             });
         });
    }
