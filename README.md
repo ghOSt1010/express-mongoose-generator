@@ -248,7 +248,7 @@ export default class car {
 		 this.owner = owner;
    }
 
-   getEmployeeDTO() {
+   getDTO() {
       return {
 			color: this.color,
 			door: this.door,
@@ -284,7 +284,7 @@ export default class carService {
    static async createDTO(color, door, owner) {
       return new car_DTO(
          color, door, owner
-      ).getEmployeeDTO();
+      ).getDTO();
    }
 
    static async getList() {
