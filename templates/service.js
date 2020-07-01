@@ -60,26 +60,17 @@ class {modelNameService} {
 
       {pluralName}.findOne({_id: {modelNameToUpdate}._id}, function (err, {name}) {
          if (err) {
-            return res.status(500).json({
-            message: 'RETRIVE_ERROR: {name}',
-            error: err
-            });
+            throw new Error ('RETRIVE_ERROR: {name}')
          }
          if (!{name}) {
-            return res.status(404).json({
-               message: 'MISSING_ERROR: {name}'
-            });
+            throw new Error ('MISSING_ERROR: {name}')
          }
 
          {updateFields}
          {name}.save(function (err, {name}) {
             if (err) {
-               return res.status(500).json({
-                  message: 'UPDATE_ERROR: {name}.',
-                  error: err
-                  });
-               }
-               return res.json({name});
+               throw new Error('UPDATE_ERROR: {name}')
+               return {name};
             });
         });
    }
