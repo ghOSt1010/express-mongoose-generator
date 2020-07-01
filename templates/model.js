@@ -3,5 +3,5 @@ var Schema = mongoose.Schema;
 
 var {schemaName} = new Schema({fields});
 
-EmployeesSchema.plugin(require('mongoose-autopopulate'));
+{schemaName}.plugin(require('mongoose-autopopulate'));
 module.exports = mongoose.model('{modelName}', {schemaName});
