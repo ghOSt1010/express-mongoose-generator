@@ -82,7 +82,7 @@ class {modelNameController} {
         var id = req.params.id;
 
         try {
-            var data = await {modelNameService}.remove(id);
+            var data = await {modelNameService}.delete(id);
             return await res.status(200).json(data);
         } catch (err) {
             return await res.status(500).json(err);
