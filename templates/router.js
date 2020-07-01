@@ -20,7 +20,7 @@ router.post('/', {controllerName}.create);
 /*
  * PUT
  */
-router.put('/:id', {controllerName}.update);
+router.put('/', {controllerName}.update);
 
 /*
  * DELETE
