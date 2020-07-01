@@ -1,6 +1,6 @@
 import {dto} from './{dtoName}';
 import ROUTES from './{routesName}';
-import Request from '../../Requests/Request';
+import Request from '../Requests/Request';
 
 export default class {clientServiceName} {
    static async createDTO({props}) {
