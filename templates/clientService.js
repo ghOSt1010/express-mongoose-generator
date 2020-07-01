@@ -6,7 +6,7 @@ export default class {clientServiceName} {
    static async createDTO({props}) {
       return new {dto}(
          {props}
-      ).getEmployeeDTO();
+      ).getDTO();
    }
 
    static async getList() {

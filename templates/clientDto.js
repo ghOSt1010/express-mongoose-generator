@@ -3,7 +3,7 @@ export default class {name} {
 {constructorFileds}
    }
 
-   getEmployeeDTO() {
+   getDTO() {
       return {
 {dtoFields}
       }
